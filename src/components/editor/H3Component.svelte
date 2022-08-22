@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { document } from "../../components";
+    import type { ComponentManagement } from "src/common/commands";
+    
     export let value = "";
-    export let self;
+    export let self: ComponentManagement;
+
     function backspaceHandler(e) {
         console.log(value);
         if (value === "" && e.key === "Backspace") {
@@ -10,7 +12,7 @@
     }
 </script>
 
-<h1
+<h3
     draggable="true"
     contenteditable="true"
     bind:textContent={value}
@@ -18,4 +20,4 @@
     on:keydown={backspaceHandler}
 >
     {value} ({self.isNewest()})
-</h1>
+</h3>
