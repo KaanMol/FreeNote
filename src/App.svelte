@@ -1,4 +1,6 @@
 <script lang="ts">
+import { ComponentManagement } from "./common/commands";
+
     import { document } from "./components";
     import GenericComponent from "./components/editor/GenericComponent.svelte";
 
@@ -35,6 +37,8 @@
         )
     );
 
+
+
     export let items;
 </script>
 
@@ -53,7 +57,10 @@
             <svelte:component
                 this={item.component}
                 bind:value={item.value}
-                newestComponent={newestComponentIndex === index}
+                self={new ComponentManagement(
+                    index,
+                    newestComponentIndex === index
+                )}
             />
         </div>
     {/each}
