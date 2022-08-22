@@ -1,12 +1,12 @@
 <script lang="ts">
-    let edit = true;
     export let value: string;
-    export let componentManagement;
+    export let self;
+    let edit = value === "";
 </script>
 
 {#if edit}
     <input
-        autofocus={componentManagement.isNewest()}
+        autofocus={self.isNewest()}
         type="text"
         placeholder="Image source"
         bind:value

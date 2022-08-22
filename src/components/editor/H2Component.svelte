@@ -1,12 +1,9 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-
-    import { document } from "../../components";
     export let value = "";
     export let self;
 
     function backspaceHandler(e) {
-        console.log(value);
+        // console.log(value);
         if (value === "" && e.key === "Backspace") {
             self.destroy();
         }

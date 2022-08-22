@@ -1,11 +1,11 @@
 <script lang="ts">
     import type { ComponentManagement } from "src/common/commands";
-    
+
     export let value = "";
     export let self: ComponentManagement;
 
     function backspaceHandler(e) {
-        console.log(value);
+        // console.log(value);
         if (value === "" && e.key === "Backspace") {
             self.destroy();
         }
