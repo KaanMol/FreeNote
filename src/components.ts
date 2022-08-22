@@ -95,13 +95,17 @@ export const commands = [
 
 export const document = writable([
     {
+        id: 1,
         component: H1Component,
         value: "Hello World",
         createdAt: Date.now(),
     },
     {
+        id: 2,
         component: GenericComponent,
         value: "",
         createdAt: Date.now(),
     },
 ]);
+
+export const lastId = writable(2);

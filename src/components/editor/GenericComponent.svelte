@@ -4,7 +4,7 @@
 
     $: sketchyChecker(value);
 
-    import { document, commands } from "../../components";
+    import { document, commands, lastId } from "../../components";
     import GenericComponent from "./GenericComponent.svelte";
 
     function sketchyChecker(value: string) {
@@ -20,6 +20,7 @@
                 value.startsWith("/" + command.command)
             ) {
                 $document[$document.length - 1] = {
+                    ...$document[$document.length - 1],
                     component: command.component,
                     createdAt: Date.now(),
                     value: value.substring(
@@ -29,6 +30,7 @@
                 };
 
                 $document.push({
+                    id: ++$lastId,
                     component: GenericComponent,
                     value: "",
                     createdAt: Date.now() - 1,
