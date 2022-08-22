@@ -38,7 +38,7 @@
     }
 </script>
 
-<input type="text" bind:value autocomplete="off" />
+<p contenteditable="true" bind:textContent={value}>{value}</p>
 
 {#if showCommands}
     <div class="commands">
