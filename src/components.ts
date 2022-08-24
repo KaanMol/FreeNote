@@ -122,7 +122,6 @@ export const document = writable([
     {
         id: 2,
         component: GenericComponent,
-        value: "bs",
         createdAt: Date.now(),
     },
 ]);

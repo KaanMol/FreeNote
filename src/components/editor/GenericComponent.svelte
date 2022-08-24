@@ -34,6 +34,7 @@
             ) {
                 $document[$document.length - 1] = {
                     ...$document[$document.length - 1],
+                    value: "",
                     component: command.component,
                     createdAt: Date.now(),
                 };
