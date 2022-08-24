@@ -23,10 +23,6 @@
                     ...$document[$document.length - 1],
                     component: command.component,
                     createdAt: Date.now(),
-                    value: value.substring(
-                        command.command.length + 1,
-                        value.length
-                    ),
                 };
 
                 $document.push({

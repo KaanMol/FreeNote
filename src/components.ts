@@ -3,6 +3,7 @@ import GenericComponent from "./components/editor/GenericComponent.svelte";
 import H1Component from "./components/editor/H1Component.svelte";
 import H2Component from "./components/editor/H2Component.svelte";
 import H3Component from "./components/editor/H3Component.svelte";
+import Kanban from "./components/editor/Kanban.svelte";
 import ImageComponent from "./components/editor/ImageComponent.svelte";
 
 interface CommandConfig<T> {
@@ -38,7 +39,23 @@ class Command<T> {
     get description() {
         return this.config.description;
     }
+
+    public getDefaultValue(value: string) {
+        return value.substring(this.command.length + 1, value.length);
+    }
 }
+class KanboenComponent extends Command<typeof Kanban> {
+    constructor() {
+        super({
+            command: "kanban",
+            shortcut: "kb",
+            component: Kanban,
+            name: "Kanban board",
+            description: "Add a Kanban to your document",
+        });
+    }
+}
+
 class H1Command extends Command<typeof H1Component> {
     constructor() {
         super({
@@ -91,6 +108,7 @@ export const commands = [
     new H2Command(),
     new H3Command(),
     new ImageCommand(),
+    new KanboenComponent(),
 ];
 
 export const document = writable([
@@ -103,7 +121,7 @@ export const document = writable([
     {
         id: 2,
         component: GenericComponent,
-        value: "",
+        value: "bs",
         createdAt: Date.now(),
     },
 ]);

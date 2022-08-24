@@ -1,7 +1,7 @@
 <script lang="ts">
     export let value: string;
     export let self;
-    let edit = value === "";
+    let edit = value === "" || value === undefined;
 </script>
 
 {#if edit}
