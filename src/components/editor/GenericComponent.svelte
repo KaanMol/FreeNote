@@ -3,18 +3,31 @@
     let showCommands = false;
 
     $: sketchyChecker(value);
-
     import { document, commands, lastId } from "../../components";
     import GenericComponent from "./GenericComponent.svelte";
 
+    let visibleCommands = commands;
+
+    function applies(command) {
+        // return (
+        //     //command.command.startsWith(value) ||
+        //     command.shortcut.startsWith(value)
+        // );
+    }
+
     function sketchyChecker(value: string) {
-        if (value !== "") {
+        if (value.at(0) === "/") {
             showCommands = true;
         } else {
             showCommands = false;
         }
 
+        visibleCommands = commands.filter((item) =>
+            item.command.startsWith(value.substring(1))
+        );
+
         commands.forEach((command) => {
+            console.log(value.startsWith("/" + command.command));
             if (
                 value.startsWith(command.shortcut) ||
                 value.startsWith("/" + command.command)
@@ -40,7 +53,7 @@
 
 <div class="commands-wrapper">
     <div class={"commands " + (showCommands ? "" : "hidden")}>
-        {#each commands as command}
+        {#each visibleCommands as command}
             <div
                 class="command"
                 on:click={() => {
@@ -71,6 +84,7 @@
     .commands {
         &.hidden {
             opacity: 0;
+            pointer-events: none;
         }
 
         transition: 200ms ease;
@@ -79,7 +93,6 @@
         position: absolute;
         width: 200px;
         top: 0px;
-        left: 2rem;
         border: solid 2px gray;
         border-radius: 12px;
 
