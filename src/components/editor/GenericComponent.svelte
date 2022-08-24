@@ -8,7 +8,7 @@
     import GenericComponent from "./GenericComponent.svelte";
 
     function sketchyChecker(value: string) {
-        if (value === "/") {
+        if (value !== "") {
             showCommands = true;
         } else {
             showCommands = false;
@@ -36,10 +36,10 @@
     }
 </script>
 
-<p contenteditable="true" bind:textContent={value}>{value}</p>
+<p class="spawner" contenteditable="true" bind:textContent={value}>{value}</p>
 
-{#if showCommands}
-    <div class="commands">
+<div class="commands-wrapper">
+    <div class={"commands " + (showCommands ? "" : "hidden")}>
         {#each commands as command}
             <div
                 class="command"
@@ -56,17 +56,38 @@
             </div>
         {/each}
     </div>
-{/if}
+</div>
 
 <style lang="scss">
+    .spawner {
+        padding-right: 100px;
+    }
+
+    .commands-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
     .commands {
+        &.hidden {
+            opacity: 0;
+        }
+
+        transition: 200ms ease;
+
+        opacity: 1;
         position: absolute;
-        border: solid 2px red;
+        width: 200px;
+        top: 0px;
+        left: 2rem;
+        border: solid 2px gray;
         border-radius: 12px;
 
         .command {
+            padding: 0.25rem 0.5rem;
+
             &:not(:last-child) {
-                border-bottom: 2px solid red;
+                border-bottom: 2px solid gray;
             }
 
             .name {

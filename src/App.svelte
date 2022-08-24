@@ -95,10 +95,7 @@
     }
 </script>
 
-<button on:click={() => reset()}>clear</button>
-<p>hoverindex: {hoverIndex}</p>
-<p>latestindex: {newestComponentIndex}</p>
-
+<button on:click={() => reset()}>Clear contents</button>
 <div
     class="items"
     use:dndzone={{ items: $document }}
@@ -117,6 +114,7 @@
             on:dragenter={(e) => dragEnter(e, index)}
         >
             <div class="item-content">
+                <span class="material-icons"> drag_indicator </span>
                 <svelte:component
                     this={item.component}
                     class="content"
@@ -131,22 +129,46 @@
     {/each}
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
+    button {
+        background: #ff7f77;
+        color: black;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: none;
+    }
+
     .items {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        display: grid;
+        grid-template-rows: auto;
+    }
 
-        .item {
-            padding-left: 50px;
+    .item {
+        &.hover {
+            background-color: #eee;
+        }
 
-            &.hover {
-                background-color: #eee;
+        .item-content {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 40px max-content;
+            align-items: center;
+            z-index: 10;
+            cursor: text;
+            &:hover {
+                & .material-icons {
+                    opacity: 1;
+                    transition: 250ms;
+                }
             }
 
-            .item-content {
-                z-index: 10;
-                cursor: text;
+            .material-icons {
+                // display: none;
+                opacity: 0;
+                cursor: grab;
+                margin-right: 15px;
+                transition: 250ms;
             }
         }
     }
