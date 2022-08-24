@@ -115,21 +115,23 @@
         >
             <div class="item-content">
                 <span class="material-icons"> drag_indicator </span>
-                <svelte:component
-                    this={item.component}
-                    class="content"
-                    bind:value={item.value}
-                    self={new ComponentManagement(
-                        index,
-                        newestComponentIndex === index
-                    )}
-                />
+                <div>
+                    <svelte:component
+                        this={item.component}
+                        class="content"
+                        bind:value={item.value}
+                        self={new ComponentManagement(
+                            index,
+                            newestComponentIndex === index
+                        )}
+                    />
+                </div>
             </div>
         </div>
     {/each}
 </div>
 
-<style lang="scss" global>
+<style lang="scss">
     button {
         background: #ff7f77;
         color: black;
