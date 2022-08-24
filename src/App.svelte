@@ -2,14 +2,11 @@
     import { ComponentManagement } from "./common/commands";
     import { dndzone } from "svelte-dnd-action";
 
-    import { document, lastId } from "./components";
+    import { document, lastId, serialize } from "./components";
     import GenericComponent from "./components/editor/GenericComponent.svelte";
     import H1Component from "./components/editor/H1Component.svelte";
-    import Kanabn from "./components/editor/Kanban.svelte";
-    import Kanban from "./components/editor/Kanban.svelte";
 
     let hoverIndex = -1;
-    let isHovering = false;
     let newestComponentIndex = 0;
 
     let board = [
@@ -39,19 +36,6 @@
             items: [],
         },
     ];
-
-    function dragStart(event: DragEvent, index: number) {
-        console.log("dragstart", index, event);
-    }
-
-    function drop(event: DragEvent, index: number) {
-        console.log("drop", index, event);
-    }
-
-    function dragEnter(event: DragEvent, index: number) {
-        console.log("dragenter", index, event);
-        hoverIndex = index;
-    }
 
     function reset() {
         document.set([
@@ -93,9 +77,14 @@
         console.log("finalizing", e);
         $document = e.detail.items;
     }
+
+    function save() {
+        console.log(serialize());
+    }
 </script>
 
 <button on:click={() => reset()}>Clear contents</button>
+<button on:click={() => save()}>Save contents</button>
 <div
     class="items"
     use:dndzone={{ items: $document }}
@@ -109,9 +98,6 @@
             data-index={index}
             class={"item " + (hoverIndex === index ? "hover" : "")}
             draggable="true"
-            on:dragstart={(e) => dragStart(e, index)}
-            on:drop|preventDefault={(e) => drop(e, index)}
-            on:dragenter={(e) => dragEnter(e, index)}
         >
             <div class="item-content">
                 <span class="material-icons"> drag_indicator </span>

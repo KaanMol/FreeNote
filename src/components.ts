@@ -1,4 +1,5 @@
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
+
 import GenericComponent from "./components/editor/GenericComponent.svelte";
 import H1Component from "./components/editor/H1Component.svelte";
 import H2Component from "./components/editor/H2Component.svelte";
@@ -127,3 +128,7 @@ export const document = writable([
 ]);
 
 export const lastId = writable(2);
+
+export function serialize() {
+    return JSON.stringify(get(document));
+}
