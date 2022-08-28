@@ -5,6 +5,14 @@
 
     export function focus() {
         ref.focus();
+
+        // Position the caret at the end of the text
+        let range = document.createRange();
+        range.selectNodeContents(ref);
+        range.collapse(false);
+        let sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
     }
 </script>
 
