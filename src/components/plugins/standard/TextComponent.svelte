@@ -13,6 +13,6 @@
 <style lang="scss">
     p {
         line-height: 1.5em;
-        margin: 0;
+        margin: 0.5rem 0;
     }
 </style>
