@@ -9,6 +9,7 @@ export abstract class ComponentDefinition<TComponent, TState> {
     abstract readonly shorthand: ShorthandDefinition;
 
     abstract readonly componentType: any;
+    abstract readonly defaultState: TState;
 
     abstract serialize(state: TState): string;
     abstract deserialize(serialized: string): TState;

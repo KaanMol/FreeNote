@@ -9,6 +9,8 @@ export class H1ComponentDefinition extends ComponentDefinition<H1Component, Stri
     information = new ComponentInformation("Heading 1", "Add a Heading 1 to your document");
     shorthand = new ShorthandDefinition("h1", "#");
 
+    defaultState = "";
+
     serialize(state: string): string {
         return state;
     }

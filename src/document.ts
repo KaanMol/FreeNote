@@ -12,9 +12,13 @@ export function getDocument(): ComponentInstance<any, any>[] {
     return get(document);
 }
 
-export function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TComponent, TState>, state: TState): void {
+export function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TComponent, TState>, state: TState = undefined): void {
     if (getComponent(definition.identifier) === undefined) {
         console.warn(`Inserting a component that is not registered: ${definition.componentType.name} (${definition.identifier}). Did you forget to register it? Serializing will fail.`);
+    }
+
+    if (state === undefined) {
+        state = definition.defaultState;
     }
 
     document.update((doc) => {

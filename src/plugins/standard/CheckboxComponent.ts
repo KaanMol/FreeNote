@@ -9,6 +9,8 @@ export class CheckboxComponentDefinition extends ComponentDefinition<CheckboxCom
     information = new ComponentInformation("Checkbox", "Add a checkbox to your document");
     shorthand = new ShorthandDefinition("checkbox", "c");
 
+    defaultState = false;
+
     serialize(state: boolean): string {
         return state.toString();
     }

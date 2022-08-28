@@ -9,6 +9,8 @@ export class ImageComponentDefinition extends ComponentDefinition<ImageComponent
     information = new ComponentInformation("Image", "Add an image to your document");
     shorthand = new ShorthandDefinition("image", "img");
 
+    defaultState = "";
+
     serialize(state: string): string {
         return state;
     }
