@@ -5,6 +5,7 @@
     import { H1ComponentDefinition } from "./plugins/standard/H1Component";
     import { ImageComponentDefinition } from "./plugins/standard/ImageComponent";
     import { TextComponentDefinition } from "./plugins/standard/TextComponent";
+    import Spawner from "./Spawner.svelte";
 
     clearDocument();
 
@@ -32,4 +33,12 @@
     {#each $document as item}
         <svelte:component this={item.definition.componentType} bind:state={item.state} />
     {/each}
+    <Spawner />
 </div>
+
+<style lang="scss">
+    .items {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
