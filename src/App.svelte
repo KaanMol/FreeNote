@@ -2,6 +2,7 @@
     import { registerComponent } from "./components/definitions";
     import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument, documentRef } from "./components/document";
     import { CheckboxComponentDefinition } from "./components/plugins/standard/CheckboxComponent";
+    import { CodeComponentDefinition } from "./components/plugins/standard/CodeComponent";
     import { H1ComponentDefinition } from "./components/plugins/standard/H1Component";
     import { H2ComponentDefinition } from "./components/plugins/standard/H2Component";
     import { H3ComponentDefinition } from "./components/plugins/standard/H3Component";
@@ -14,11 +15,13 @@
     registerComponent(new H1ComponentDefinition());
     registerComponent(new H2ComponentDefinition());
     registerComponent(new H3ComponentDefinition());
+    registerComponent(new CodeComponentDefinition());
     registerComponent(new CheckboxComponentDefinition());
     registerComponent(new ImageComponentDefinition());
     registerComponent(new TextComponentDefinition());
 
     insertInDocument(new H1ComponentDefinition(), "Hello world!");
+    insertInDocument(new CodeComponentDefinition());
     insertInDocument(new TextComponentDefinition(), "This is some text");
     insertInDocument(new H2ComponentDefinition(), "Heading two");
     insertInDocument(new TextComponentDefinition(), "Images here ...");
@@ -54,5 +57,9 @@
     .elements {
         display: flex;
         flex-direction: column;
+
+        .element {
+            width: 100%;
+        }
     }
 </style>
