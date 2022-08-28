@@ -3,7 +3,6 @@
     export let state: boolean;
 
     export function focus() {
-        console.log("checkbox");
         ref.focus();
     }
 </script>

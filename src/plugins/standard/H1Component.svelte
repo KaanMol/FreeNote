@@ -3,7 +3,6 @@
     export let state: string;
 
     export function focus() {
-        console.log("h1");
         ref.focus();
     }
 </script>
