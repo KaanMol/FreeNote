@@ -4,12 +4,14 @@
     import { CheckboxComponentDefinition } from "./plugins/standard/CheckboxComponent";
     import { H1ComponentDefinition } from "./plugins/standard/H1Component";
     import { ImageComponentDefinition } from "./plugins/standard/ImageComponent";
+    import { TextComponentDefinition } from "./plugins/standard/TextComponent";
 
     clearDocument();
 
     registerComponent(new H1ComponentDefinition());
     registerComponent(new CheckboxComponentDefinition());
     registerComponent(new ImageComponentDefinition());
+    registerComponent(new TextComponentDefinition());
 
     insertInDocument(new H1ComponentDefinition(), "Hello world!");
     insertInDocument(new ImageComponentDefinition(), "");
