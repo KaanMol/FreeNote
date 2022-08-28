@@ -3,13 +3,16 @@
     import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument } from "./document";
     import { CheckboxComponentDefinition } from "./plugins/standard/CheckboxComponent";
     import { H1ComponentDefinition } from "./plugins/standard/H1Component";
+    import { ImageComponentDefinition } from "./plugins/standard/ImageComponent";
 
     clearDocument();
 
     registerComponent(new H1ComponentDefinition());
     registerComponent(new CheckboxComponentDefinition());
+    registerComponent(new ImageComponentDefinition());
 
     insertInDocument(new H1ComponentDefinition(), "Hello world!");
+    insertInDocument(new ImageComponentDefinition(), "");
 
     function save() {
         localStorage.setItem("save", serializeDocument());
