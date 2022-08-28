@@ -4,12 +4,17 @@
     import { getComponents } from "./components/definitions";
     import { insertInDocument } from "./document";
 
+    let ref: HTMLParagraphElement;
     let value: string;
     let mode: "none" | "command" | "shortcut";
     let filteredComponents: ComponentDefinition<any, any>[] = [];
     let autocomplete: string = "";
     let caretXY: [number, number] = [0, 0];
     let selectedSuggestionIndex = 0;
+
+    export function focus() {
+        ref.focus();
+    }
 
     $: processValue(value);
 
@@ -38,12 +43,12 @@
     }
 
     function keydown(e: KeyboardEvent & { currentTarget: EventTarget & HTMLParagraphElement }) {
-        if (e.code === "ArrowDown") {
+        if (e.code === "ArrowDown" && filteredComponents.length > 0) {
             e.preventDefault();
             selectedSuggestionIndex = Math.min(filteredComponents.length - 1, selectedSuggestionIndex + 1);
         }
 
-        if (e.code === "ArrowUp") {
+        if (e.code === "ArrowUp" && filteredComponents.length > 0) {
             e.preventDefault();
             selectedSuggestionIndex = Math.max(0, selectedSuggestionIndex - 1);
         }
@@ -60,7 +65,7 @@
 
 <div class="spawner">
     <div class="input">
-        <p contenteditable="true" bind:textContent={value} on:keydown={(e) => keydown(e)} class={"mode-" + mode} />
+        <p bind:this={ref} contenteditable="true" bind:textContent={value} on:keydown={(e) => keydown(e)} class={"mode-" + mode} />
         {#if autocomplete && filteredComponents.length == 1}
             <p class="autocomplete">{autocomplete}</p>
         {/if}
