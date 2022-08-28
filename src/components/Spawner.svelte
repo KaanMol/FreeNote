@@ -1,34 +1,34 @@
 <script lang="ts">
     import type { ComponentDefinition } from "./components";
-
     import { getComponents } from "./definitions";
     import { insertInDocument } from "./document";
     import { TextComponentDefinition } from "./plugins/standard/TextComponent";
 
+    $: processValue(value);
+
     let ref: HTMLParagraphElement;
     let value: string;
+
     let mode: "none" | "command" | "shortcut";
+
     let filteredComponents: ComponentDefinition<any, any>[] = [];
-    let autocomplete: string = "";
-    let caretXY: [number, number] = [0, 0];
     let selectedSuggestionIndex = 0;
+    let autocomplete: string = "";
+
+    let caretPosition: { x: number; y: number } = { x: 0, y: 0 };
 
     export function focus() {
         ref.focus();
     }
 
-    $: processValue(value);
-
+    // Ran on value change
     function processValue(value: string) {
         if (!value) {
             mode = "none";
             autocomplete = "";
             filteredComponents = [];
             selectedSuggestionIndex = 0;
-            return;
-        }
-
-        if (value.startsWith("/")) {
+        } else if (value.startsWith("/")) {
             mode = "command";
             filteredComponents = getComponents().filter((d) => d.shorthand.command.startsWith(value.substring(1)));
             autocomplete = filteredComponents.length > 0 ? filteredComponents[0].shorthand.command.substring(value.length - 1) : "";
@@ -38,44 +38,60 @@
             autocomplete = filteredComponents.length > 0 ? filteredComponents[0].shorthand.shortcut.substring(value.length) : "";
         }
 
-        selectedSuggestionIndex = Math.min(filteredComponents.length - 1, selectedSuggestionIndex);
-
-        var selection = window.getSelection();
-        var range = selection.getRangeAt(0);
-        var rect = range.getClientRects();
-        caretXY = [rect[0].x, rect[0].y];
+        // Update caret position
+        caretPosition = getCaretPosition();
     }
 
     function keydown(e: KeyboardEvent & { currentTarget: EventTarget & HTMLParagraphElement }) {
-        if (e.code === "ArrowDown" && filteredComponents.length > 0) {
-            e.preventDefault();
-            selectedSuggestionIndex = Math.min(filteredComponents.length - 1, selectedSuggestionIndex + 1);
+        // Process suggestions
+        if (filteredComponents.length > 0) {
+            if (e.code === "ArrowDown") {
+                e.preventDefault();
+                selectedSuggestionIndex++;
+            } else if (e.code === "ArrowUp") {
+                e.preventDefault();
+                selectedSuggestionIndex--;
+            }
+
+            // Generate autocomplete value
+            if (mode === "command") {
+                autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.command.substring(value.length - 1);
+            } else if (mode === "shortcut") {
+                autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.shortcut.substring(value.length);
+            }
         }
 
-        if (e.code === "ArrowUp" && filteredComponents.length > 0) {
-            e.preventDefault();
-            selectedSuggestionIndex = Math.max(0, selectedSuggestionIndex - 1);
-        }
-
-        if (mode === "command") {
-            autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.command.substring(value.length - 1);
-        } else if (mode === "shortcut") {
-            autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.shortcut.substring(value.length);
-        }
-
+        // Process component insertion
         if (e.code === "Enter" || e.code === "Tab" || e.code === "Space") {
             e.preventDefault();
+
+            // If there are no filtered components, insert the value as a TextComponent
             if (filteredComponents.length > 0) {
                 insertInDocument(filteredComponents[selectedSuggestionIndex]);
             } else {
                 insertInDocument(new TextComponentDefinition(), value);
             }
+
             value = "";
+        }
+
+        // Make sure the selected suggestion is in the range of filtered components
+        selectedSuggestionIndex = Math.max(0, Math.min(selectedSuggestionIndex, filteredComponents.length - 1));
+    }
+
+    function getCaretPosition() {
+        try {
+            var selection = window.getSelection();
+            var range = selection.getRangeAt(0);
+            var rect = range.getClientRects();
+            return { x: rect[0].x, y: rect[0].y };
+        } catch {
+            return { x: 0, y: 0 };
         }
     }
 </script>
 
-<div class={"spawner"}>
+<div class="spawner">
     <div class="input">
         <p bind:this={ref} contenteditable="true" bind:textContent={value} on:keydown={(e) => keydown(e)} class={"mode-" + mode} />
         {#if autocomplete}
@@ -84,7 +100,7 @@
     </div>
 
     {#if filteredComponents.length > 0}
-        <div class="suggestions" style={"left: " + caretXY[0] + "px; top: " + caretXY[1] + "px"}>
+        <div class="suggestions" style={"left: " + caretPosition.x + "px; top: " + caretPosition.y + "px"}>
             {#each filteredComponents as suggestion, index}
                 <div class={"suggestion " + (index === selectedSuggestionIndex ? "selected" : "")}>
                     {#if mode === "command"}
