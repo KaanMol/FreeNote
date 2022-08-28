@@ -1,6 +1,4 @@
 <script lang="ts">
-    export class Test {}
-
     export let state: string;
 </script>
 
