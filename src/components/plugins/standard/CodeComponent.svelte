@@ -12,7 +12,7 @@
         ref.focus();
     }
 
-    $: html = highlight.highlight(state.language, state.code).value;
+    $: html = highlight.highlight(state.code, { language: state.language }).value;
 </script>
 
 <div class="code">
