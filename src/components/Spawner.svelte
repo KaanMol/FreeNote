@@ -3,6 +3,7 @@
 
     import { getComponents } from "./definitions";
     import { insertInDocument } from "./document";
+    import { TextComponentDefinition } from "./plugins/standard/TextComponent";
 
     let ref: HTMLParagraphElement;
     let value: string;
@@ -57,8 +58,10 @@
             e.preventDefault();
             if (filteredComponents.length > 0) {
                 insertInDocument(filteredComponents[selectedSuggestionIndex]);
-                value = "";
+            } else {
+                insertInDocument(new TextComponentDefinition(), value);
             }
+            value = "";
         }
     }
 </script>
