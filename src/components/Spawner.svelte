@@ -24,6 +24,7 @@
             mode = "none";
             autocomplete = "";
             filteredComponents = [];
+            selectedSuggestionIndex = 0;
             return;
         }
 
@@ -56,6 +57,12 @@
             selectedSuggestionIndex = Math.max(0, selectedSuggestionIndex - 1);
         }
 
+        if (mode === "command") {
+            autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.command.substring(value.length - 1);
+        } else if (mode === "shortcut") {
+            autocomplete = filteredComponents[selectedSuggestionIndex].shorthand.shortcut.substring(value.length);
+        }
+
         if (e.code === "Enter" || e.code === "Tab" || e.code === "Space") {
             e.preventDefault();
             if (filteredComponents.length > 0) {
@@ -71,7 +78,7 @@
 <div class={"spawner"}>
     <div class="input">
         <p bind:this={ref} contenteditable="true" bind:textContent={value} on:keydown={(e) => keydown(e)} class={"mode-" + mode} />
-        {#if autocomplete && filteredComponents.length == 1}
+        {#if autocomplete}
             <p class="autocomplete">{autocomplete}</p>
         {/if}
     </div>
@@ -94,7 +101,7 @@
 
 <style lang="scss">
     .spawner {
-        margin-bottom: 5rem;
+        margin-bottom: 15rem;
     }
 
     p {
