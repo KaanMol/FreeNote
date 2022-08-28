@@ -131,6 +131,16 @@
                 background-color: #ccc;
                 color: black;
             }
+
+            .command {
+                font-weight: bold;
+                font-family: monospace;
+                border: 1px solid #ccc;
+                padding: 0 0.25rem;
+                border-radius: 0.5rem;
+                margin: 0;
+                line-height: 1;
+            }
         }
 
         .suggestion:not(:last-child) {
