@@ -1,4 +1,4 @@
-import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components/components";
+import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
 import ImageComponent from "./ImageComponent.svelte";
 
 export class ImageComponentDefinition extends ComponentDefinition<ImageComponent, String> {

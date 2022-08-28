@@ -1,7 +1,7 @@
 import { tick } from "svelte";
 import { writable, type Writable, get } from "svelte/store";
-import { ComponentDefinition, ComponentInstance } from "./components/components";
-import { getComponent } from "./components/definitions";
+import { ComponentDefinition, ComponentInstance } from "./components";
+import { getComponent } from "./definitions";
 
 export const document: Writable<ComponentInstance<any, any>[]> = writable([]); // todo: replace any with a Svelte component base type
 export const documentRef: any[] = [];
@@ -62,6 +62,7 @@ export function deserializeDocument(data: string) {
 
         if (definition === undefined) {
             console.warn(`Could not find definition for identifier ${identifier}`);
+            // todo: popup error message: "Some components could not be loaded."
             continue;
         }
 

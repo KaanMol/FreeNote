@@ -1,4 +1,4 @@
-import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components/components";
+import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
 import CheckboxComponent from "./CheckboxComponent.svelte";
 
 export class CheckboxComponentDefinition extends ComponentDefinition<CheckboxComponent, Boolean> {

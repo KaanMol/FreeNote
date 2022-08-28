@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { ComponentDefinition } from "./components/components";
+    import type { ComponentDefinition } from "./components";
 
-    import { getComponents } from "./components/definitions";
+    import { getComponents } from "./definitions";
     import { insertInDocument } from "./document";
 
     let ref: HTMLParagraphElement;
@@ -53,7 +53,7 @@
             selectedSuggestionIndex = Math.max(0, selectedSuggestionIndex - 1);
         }
 
-        if (e.code === "Enter" || e.code === "Tab") {
+        if (e.code === "Enter" || e.code === "Tab" || e.code === "Space") {
             e.preventDefault();
             if (filteredComponents.length > 0) {
                 insertInDocument(filteredComponents[selectedSuggestionIndex]);
@@ -63,7 +63,7 @@
     }
 </script>
 
-<div class="spawner">
+<div class={"spawner"}>
     <div class="input">
         <p bind:this={ref} contenteditable="true" bind:textContent={value} on:keydown={(e) => keydown(e)} class={"mode-" + mode} />
         {#if autocomplete && filteredComponents.length == 1}
@@ -88,6 +88,10 @@
 </div>
 
 <style lang="scss">
+    .spawner {
+        margin-bottom: 5rem;
+    }
+
     p {
         flex-grow: 1;
     }
@@ -109,7 +113,7 @@
     }
 
     .suggestions {
-        position: absolute;
+        position: fixed;
         margin-top: 1.5rem;
         border: 1px solid #ccc;
         display: flex;

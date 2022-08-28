@@ -1,22 +1,33 @@
 <script lang="ts">
     import { registerComponent } from "./components/definitions";
-    import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument, documentRef } from "./document";
-    import { CheckboxComponentDefinition } from "./plugins/standard/CheckboxComponent";
-    import { H1ComponentDefinition } from "./plugins/standard/H1Component";
-    import { ImageComponentDefinition } from "./plugins/standard/ImageComponent";
-    import { TextComponentDefinition } from "./plugins/standard/TextComponent";
-    import Spawner from "./Spawner.svelte";
-
-    let spawner: Spawner;
+    import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument, documentRef } from "./components/document";
+    import { CheckboxComponentDefinition } from "./components/plugins/standard/CheckboxComponent";
+    import { H1ComponentDefinition } from "./components/plugins/standard/H1Component";
+    import { H2ComponentDefinition } from "./components/plugins/standard/H2Component";
+    import { H3ComponentDefinition } from "./components/plugins/standard/H3Component";
+    import { ImageComponentDefinition } from "./components/plugins/standard/ImageComponent";
+    import { TextComponentDefinition } from "./components/plugins/standard/TextComponent";
+    import Spawner from "./components/Spawner.svelte";
 
     clearDocument();
 
     registerComponent(new H1ComponentDefinition());
+    registerComponent(new H2ComponentDefinition());
+    registerComponent(new H3ComponentDefinition());
     registerComponent(new CheckboxComponentDefinition());
     registerComponent(new ImageComponentDefinition());
     registerComponent(new TextComponentDefinition());
 
     insertInDocument(new H1ComponentDefinition(), "Hello world!");
+    insertInDocument(new TextComponentDefinition(), "This is some text");
+    insertInDocument(new H2ComponentDefinition(), "Heading two");
+    insertInDocument(new TextComponentDefinition(), "Images here ...");
+    insertInDocument(new H3ComponentDefinition(), "Random image #1");
+    insertInDocument(new TextComponentDefinition(), "This is a random image.");
+    insertInDocument(new ImageComponentDefinition(), "https://picsum.photos/800/300");
+    insertInDocument(new H3ComponentDefinition(), "Random image #2");
+    insertInDocument(new TextComponentDefinition(), "This also, is a random image.");
+    insertInDocument(new ImageComponentDefinition(), "https://picsum.photos/300/300");
 
     function save() {
         localStorage.setItem("save", serializeDocument());
@@ -32,13 +43,11 @@
 
 <div class="elements">
     {#each $document as item, index}
-        <div class="element">
+        <div class="element" data-component={item.definition.identifier}>
             <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
         </div>
     {/each}
-    <div class="spawner">
-        <Spawner bind:this={spawner} />
-    </div>
+    <Spawner />
 </div>
 
 <style lang="scss">

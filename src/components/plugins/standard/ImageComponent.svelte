@@ -21,3 +21,11 @@
 {:else}
     <img bind:this={ref} src={state} alt="" />
 {/if}
+
+<style lang="scss">
+    img {
+        border: 1px solid rgba(204, 204, 204, 0.2);
+        border-radius: 0.25rem;
+        margin: 0.5rem 0;
+    }
+</style>
