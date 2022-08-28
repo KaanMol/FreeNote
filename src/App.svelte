@@ -7,6 +7,8 @@
     import { TextComponentDefinition } from "./plugins/standard/TextComponent";
     import Spawner from "./Spawner.svelte";
 
+    let spawner: Spawner;
+
     clearDocument();
 
     registerComponent(new H1ComponentDefinition());
@@ -28,15 +30,19 @@
 <button on:click={() => save()}>Save</button>
 <button on:click={() => load()}>Load</button>
 
-<div class="items">
+<div class="elements">
     {#each $document as item, index}
-        <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
+        <div class="element">
+            <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
+        </div>
     {/each}
-    <Spawner />
+    <div class="spawner">
+        <Spawner bind:this={spawner} />
+    </div>
 </div>
 
 <style lang="scss">
-    .items {
+    .elements {
         display: flex;
         flex-direction: column;
     }
