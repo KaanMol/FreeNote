@@ -37,6 +37,8 @@
             autocomplete = filteredComponents.length > 0 ? filteredComponents[0].shorthand.shortcut.substring(value.length) : "";
         }
 
+        selectedSuggestionIndex = Math.min(filteredComponents.length - 1, selectedSuggestionIndex);
+
         var selection = window.getSelection();
         var range = selection.getRangeAt(0);
         var rect = range.getClientRects();
