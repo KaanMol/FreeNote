@@ -1,5 +1,11 @@
 <script lang="ts">
+    let ref: HTMLInputElement | HTMLImageElement;
     export let state: string;
+
+    export function focus() {
+        console.log("image");
+        ref.focus();
+    }
 
     function uploadLocal(element) {
         let file = element.target.files[0];
@@ -12,7 +18,7 @@
 </script>
 
 {#if !state}
-    <input type="file" on:change={uploadLocal} />
+    <input bind:this={ref} type="file" on:change={uploadLocal} />
 {:else}
-    <img src={state} alt="" />
+    <img bind:this={ref} src={state} alt="" />
 {/if}

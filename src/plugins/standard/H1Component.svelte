@@ -1,5 +1,11 @@
 <script lang="ts">
+    let ref: HTMLHeadingElement;
     export let state: string;
+
+    export function focus() {
+        console.log("h1");
+        ref.focus();
+    }
 </script>
 
-<h1 contenteditable="true" bind:textContent={state}>{state}</h1>
+<h1 bind:this={ref} contenteditable="true" bind:textContent={state}>{state}</h1>

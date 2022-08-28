@@ -1,6 +1,12 @@
 <script lang="ts">
+    let ref: HTMLInputElement;
     export let state: boolean;
+
+    export function focus() {
+        console.log("checkbox");
+        ref.focus();
+    }
 </script>
 
 <label for="test">Lol</label>
-<input id="test" type="checkbox" bind:checked={state} />
+<input bind:this={ref} id="test" type="checkbox" bind:checked={state} />

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { registerComponent } from "./components/definitions";
-    import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument } from "./document";
+    import { clearDocument, insertInDocument, document, serializeDocument, deserializeDocument, documentRef } from "./document";
     import { CheckboxComponentDefinition } from "./plugins/standard/CheckboxComponent";
     import { H1ComponentDefinition } from "./plugins/standard/H1Component";
     import { ImageComponentDefinition } from "./plugins/standard/ImageComponent";
@@ -15,7 +15,6 @@
     registerComponent(new TextComponentDefinition());
 
     insertInDocument(new H1ComponentDefinition(), "Hello world!");
-    insertInDocument(new ImageComponentDefinition(), "");
 
     function save() {
         localStorage.setItem("save", serializeDocument());
@@ -30,8 +29,8 @@
 <button on:click={() => load()}>Load</button>
 
 <div class="items">
-    {#each $document as item}
-        <svelte:component this={item.definition.componentType} bind:state={item.state} />
+    {#each $document as item, index}
+        <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
     {/each}
     <Spawner />
 </div>

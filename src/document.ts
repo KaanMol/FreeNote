@@ -1,8 +1,10 @@
+import { tick } from "svelte";
 import { writable, type Writable, get } from "svelte/store";
 import { ComponentDefinition, ComponentInstance } from "./components/components";
 import { getComponent } from "./components/definitions";
 
 export const document: Writable<ComponentInstance<any, any>[]> = writable([]); // todo: replace any with a Svelte component base type
+export const documentRef: any[] = [];
 
 export function clearDocument() {
     document.set([]);
@@ -12,7 +14,7 @@ export function getDocument(): ComponentInstance<any, any>[] {
     return get(document);
 }
 
-export function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TComponent, TState>, state: TState = undefined): void {
+export async function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TComponent, TState>, state: TState = undefined): Promise<void> {
     if (getComponent(definition.identifier) === undefined) {
         console.warn(`Inserting a component that is not registered: ${definition.componentType.name} (${definition.identifier}). Did you forget to register it? Serializing will fail.`);
     }
@@ -24,6 +26,11 @@ export function insertInDocument<TComponent, TState>(definition: ComponentDefini
     document.update((doc) => {
         return [...doc, new ComponentInstance(definition, state)];
     });
+
+    if (documentRef.length > 0) {
+        await tick();
+        documentRef[documentRef.length - 1].focus();
+    }
 }
 
 export function serializeDocument(): string {
