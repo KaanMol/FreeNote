@@ -118,6 +118,11 @@
 <style lang="scss">
     .spawner {
         margin-bottom: 15rem;
+        flex-grow: 1;
+    }
+
+    .mode-none {
+        flex-grow: 1;
     }
 
     p {
@@ -126,6 +131,7 @@
 
     .input {
         display: flex;
+        flex-grow: 1;
         flex-direction: row;
         align-items: center;
 
