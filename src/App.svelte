@@ -46,7 +46,7 @@
 
 <div class="elements">
     {#each $document as item, index}
-        <div class="element" data-component={item.definition.identifier}>
+        <div class="element">
             <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
         </div>
     {/each}
