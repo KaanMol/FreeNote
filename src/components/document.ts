@@ -3,18 +3,18 @@ import { writable, type Writable, get } from "svelte/store";
 import { ComponentDefinition, ComponentInstance } from "./components";
 import { getComponent } from "./definitions";
 
-export const document: Writable<ComponentInstance<any, any>[]> = writable([]); // todo: replace any with a Svelte component base type
+export const document: Writable<ComponentInstance<any>[]> = writable([]); // todo: replace any with a Svelte component base type
 export const documentRef: any[] = [];
 
 export function clearDocument() {
     document.set([]);
 }
 
-export function getDocument(): ComponentInstance<any, any>[] {
+export function getDocument(): ComponentInstance<any>[] {
     return get(document);
 }
 
-export async function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TComponent, TState>, state: TState = undefined): Promise<void> {
+export async function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TState>, state: TState = undefined): Promise<void> {
     if (getComponent(definition.identifier) === undefined) {
         console.warn(`Inserting a component that is not registered: ${definition.componentType.name} (${definition.identifier}). Did you forget to register it? Serializing will fail.`);
     }

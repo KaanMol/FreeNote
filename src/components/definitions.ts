@@ -1,15 +1,15 @@
 import type { ComponentDefinition } from "./components";
 
-const definitions: ComponentDefinition<any, any>[] = [];
+const definitions: ComponentDefinition<any>[] = [];
 
-export function registerComponent<T extends ComponentDefinition<any, any>>(definition: T) {
+export function registerComponent<T extends ComponentDefinition<any>>(definition: T) {
     definitions.push(definition);
 }
 
-export function getComponent(identifier: string): ComponentDefinition<any, any> | undefined {
-    return definitions.find((definition: ComponentDefinition<any, any>) => definition.identifier === identifier);
+export function getComponent(identifier: string): ComponentDefinition<any> | undefined {
+    return definitions.find((definition: ComponentDefinition<any>) => definition.identifier === identifier);
 }
 
-export function getComponents(): ComponentDefinition<any, any>[] {
+export function getComponents(): ComponentDefinition<any>[] {
     return definitions;
 }

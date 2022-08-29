@@ -1,7 +1,7 @@
 import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
 import ImageComponent from "./ImageComponent.svelte";
 
-export class ImageComponentDefinition extends ComponentDefinition<ImageComponent, String> {
+export class ImageComponentDefinition extends ComponentDefinition<String> {
     identifier = "freenote.image";
 
     componentType = ImageComponent;

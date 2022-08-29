@@ -1,8 +1,8 @@
-export class ComponentInstance<TComponent, TState> {
-    constructor(public readonly definition: ComponentDefinition<TComponent, TState>, public readonly state: TState) {}
+export class ComponentInstance<TState> {
+    constructor(public readonly definition: ComponentDefinition<TState>, public readonly state: TState) {}
 }
 
-export abstract class ComponentDefinition<TComponent, TState> {
+export abstract class ComponentDefinition<TState> {
     abstract readonly identifier: string;
 
     abstract readonly information: ComponentInformation;

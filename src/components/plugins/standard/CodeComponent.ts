@@ -5,7 +5,7 @@ export class CodeComponentState {
     constructor(public code: string, public language: string) {}
 }
 
-export class CodeComponentDefinition extends ComponentDefinition<CodeComponent, CodeComponentState> {
+export class CodeComponentDefinition extends ComponentDefinition<CodeComponentState> {
     identifier = "freenote.code";
     defaultState = { code: "console.log('Hello world!');", language: "js" };
     componentType = CodeComponent;

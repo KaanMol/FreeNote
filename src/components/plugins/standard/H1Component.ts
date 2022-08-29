@@ -1,7 +1,7 @@
 import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
 import H1Component from "./H1Component.svelte";
 
-export class H1ComponentDefinition extends ComponentDefinition<H1Component, String> {
+export class H1ComponentDefinition extends ComponentDefinition<String> {
     identifier = "freenote.h1";
     defaultState = "";
     componentType = H1Component;

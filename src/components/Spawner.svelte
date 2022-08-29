@@ -11,7 +11,7 @@
 
     let mode: "none" | "command" | "shortcut";
 
-    let filteredComponents: ComponentDefinition<any, any>[] = [];
+    let filteredComponents: ComponentDefinition<any>[] = [];
     let selectedSuggestionIndex = 0;
     let autocomplete: string = "";
 
