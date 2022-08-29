@@ -8,6 +8,7 @@ export class H3ComponentDefinition extends ComponentDefinition<String> {
 
     information = new ComponentInformation("Heading 3", "Add a Heading 2 to your document");
     shorthand = new ShorthandDefinition("h3", "###");
+    actions = [];
 
     serialize(state: string): string {
         return state;

@@ -7,6 +7,7 @@ export class ImageComponentDefinition extends ComponentDefinition<String> {
 
     information = new ComponentInformation("Image", "Add an image to your document");
     shorthand = new ShorthandDefinition("image", "img");
+    actions = [];
 
     defaultState = "";
 

@@ -12,6 +12,7 @@ export class CodeComponentDefinition extends ComponentDefinition<CodeComponentSt
 
     information = new ComponentInformation("Code", "Add a coding block to your document");
     shorthand = new ShorthandDefinition("code", "`");
+    actions = [];
 
     serialize(state: CodeComponentState): string {
         return JSON.stringify(state);

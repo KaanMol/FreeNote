@@ -14,6 +14,7 @@ export abstract class ComponentDefinition<TState> {
 
     abstract readonly information: ComponentInformation;
     abstract readonly shorthand: ShorthandDefinition;
+    abstract readonly actions: ComponentAction<TState>[];
 
     abstract readonly componentType: any;
     abstract readonly defaultState: TState;
@@ -28,4 +29,8 @@ export class ComponentInformation {
 
 export class ShorthandDefinition {
     constructor(public readonly command: string, public readonly shortcut: string) {}
+}
+
+export class ComponentAction<TState> {
+    constructor(public readonly name: string, public readonly icon: string, public readonly handler: (state: TState) => TState) {}
 }

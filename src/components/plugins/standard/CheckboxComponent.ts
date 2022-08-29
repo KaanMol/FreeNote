@@ -1,4 +1,4 @@
-import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
+import { ComponentDefinition, ComponentInformation, ComponentAction, ShorthandDefinition } from "../../components";
 import CheckboxComponent from "./CheckboxComponent.svelte";
 
 export class CheckboxComponentDefinition extends ComponentDefinition<Boolean> {
@@ -8,6 +8,15 @@ export class CheckboxComponentDefinition extends ComponentDefinition<Boolean> {
 
     information = new ComponentInformation("Checkbox", "Add a checkbox to your document");
     shorthand = new ShorthandDefinition("checkbox", "c");
+    actions = [
+        new ComponentAction<Boolean>("Checkbox", "check", (state) => {
+            return true;
+        }),
+
+        new ComponentAction<Boolean>("Checkbox", "check", (state) => {
+            return false;
+        }),
+    ];
 
     defaultState = false;
 
