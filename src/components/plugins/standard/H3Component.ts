@@ -2,7 +2,7 @@ import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "
 import H3Component from "./H3Component.svelte";
 
 export class H3ComponentDefinition extends ComponentDefinition<String> {
-    identifier = "freenote.H3";
+    identifier = "spanner.H3";
     defaultState = "";
     componentType = H3Component;
 

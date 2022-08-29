@@ -2,7 +2,7 @@ import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "
 import CheckboxComponent from "./CheckboxComponent.svelte";
 
 export class CheckboxComponentDefinition extends ComponentDefinition<Boolean> {
-    identifier = "freenote.checkbox";
+    identifier = "spanner.checkbox";
 
     componentType = CheckboxComponent;
 

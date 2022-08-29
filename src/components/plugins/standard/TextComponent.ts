@@ -1,8 +1,7 @@
 import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "../../components";
 import TextComponent from "./TextComponent.svelte";
-
 export class TextComponentDefinition extends ComponentDefinition<String> {
-    identifier = "freenote.text";
+    identifier = "spanner.Text";
     defaultState = "";
     componentType = TextComponent;
 

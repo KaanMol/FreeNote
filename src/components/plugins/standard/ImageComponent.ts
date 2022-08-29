@@ -2,8 +2,7 @@ import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "
 import ImageComponent from "./ImageComponent.svelte";
 
 export class ImageComponentDefinition extends ComponentDefinition<String> {
-    identifier = "freenote.image";
-
+    identifier = "spanner.image";
     componentType = ImageComponent;
 
     information = new ComponentInformation("Image", "Add an image to your document");

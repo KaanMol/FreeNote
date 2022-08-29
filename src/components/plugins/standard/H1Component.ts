@@ -2,7 +2,7 @@ import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "
 import H1Component from "./H1Component.svelte";
 
 export class H1ComponentDefinition extends ComponentDefinition<String> {
-    identifier = "freenote.h1";
+    identifier = "spanner.h1";
     defaultState = "";
     componentType = H1Component;
 
