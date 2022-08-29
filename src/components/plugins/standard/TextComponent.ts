@@ -2,6 +2,7 @@ import { ComponentDefinition, ComponentInformation, ShorthandDefinition } from "
 import TextComponent from "./TextComponent.svelte";
 export class TextComponentDefinition extends ComponentDefinition<String> {
     identifier = "spanner.Text";
+    identifier = "spanner.text";
     defaultState = "";
     componentType = TextComponent;
 
