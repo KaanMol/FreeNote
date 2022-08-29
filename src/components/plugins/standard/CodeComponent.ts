@@ -6,7 +6,7 @@ export class CodeComponentState {
 }
 
 export class CodeComponentDefinition extends ComponentDefinition<CodeComponent, CodeComponentState> {
-    identifier = "freenote.code";
+    identifier = "spanner.code";
     defaultState = { code: "console.log('Hello world!');", language: "js" };
     componentType = CodeComponent;
 
