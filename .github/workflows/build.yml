@@ -1,8 +1,17 @@
-name: Node.js CI
+name: Build and deploy
 
 on:
   push:
     branches: [ "main", "dev" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -22,11 +31,15 @@ jobs:
     
     - name: Build
       run: npm run build
+      
+    - name: Setup GitHub pages
+      uses: actions/configure-pages@v2
     
-    - name: Deploy
-      uses: rdarida/simple-github-pages-deploy-action@v1
+    - name: Upload compiled artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        git-base-folder: dist
-        commit-message: Compiled client
-        branch: pages
+        path: 'dist'
     
+    - name: Deploy to GitHub pages
+      id: deployment
+      uses: actions/deploy-pages@v1
