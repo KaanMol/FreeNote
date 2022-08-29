@@ -2,7 +2,7 @@
     import Spawner from "../components/Spawner.svelte";
     import { document, documentRef } from "../components/document";
     import { flip } from "svelte/animate";
-    import ElementOptions from "./ElementOptions.svelte";
+    import ElementActions from "./ElementActions.svelte";
 
     let hoveredId: string | undefined = undefined;
 
@@ -63,7 +63,7 @@
             animate:flip={{ duration: 300 }}
         >
             <div class="options">
-                <ElementOptions bind:instance={item} />
+                <ElementActions bind:instance={item} />
             </div>
             <div class="component">
                 <svelte:component this={item.definition.componentType} bind:this={documentRef[index]} bind:state={item.state} />
