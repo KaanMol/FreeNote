@@ -5,7 +5,6 @@ import { getComponent } from "./definitions";
 
 export const document: Writable<ComponentInstance<any>[]> = writable([]); // todo: replace any with a Svelte component base type
 export const documentRef: any[] = [];
-export const documentParentRef: any[] = [];
 
 export function clearDocument() {
     document.set([]);
