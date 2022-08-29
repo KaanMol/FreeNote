@@ -1,5 +1,5 @@
 export class ComponentInstance<TState> {
-    constructor(public readonly definition: ComponentDefinition<TState>, public readonly state: TState) {}
+    constructor(public readonly definition: ComponentDefinition<TState>, public readonly state: TState, public readonly id: number) {}
 }
 
 export abstract class ComponentDefinition<TState> {

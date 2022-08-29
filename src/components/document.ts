@@ -14,7 +14,9 @@ export function getDocument(): ComponentInstance<any>[] {
     return get(document);
 }
 
-export async function insertInDocument<TComponent, TState>(definition: ComponentDefinition<TState>, state: TState = undefined): Promise<void> {
+let id = 0;
+
+export async function insertInDocument<TState>(definition: ComponentDefinition<TState>, state: TState = undefined): Promise<void> {
     if (getComponent(definition.identifier) === undefined) {
         console.warn(`Inserting a component that is not registered: ${definition.componentType.name} (${definition.identifier}). Did you forget to register it? Serializing will fail.`);
     }
@@ -24,7 +26,7 @@ export async function insertInDocument<TComponent, TState>(definition: Component
     }
 
     document.update((doc) => {
-        return [...doc, new ComponentInstance(definition, state)];
+        return [...doc, new ComponentInstance(definition, state, id++)];
     });
 
     if (documentRef.length > 0) {
