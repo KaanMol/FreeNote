@@ -1,5 +1,12 @@
+import { v4 as uuidv4 } from "uuid";
+
 export class ComponentInstance<TState> {
-    constructor(public readonly definition: ComponentDefinition<TState>, public readonly state: TState, public readonly id: number) {}
+    constructor(public readonly definition: ComponentDefinition<TState>, public readonly state: TState) {
+        // Generate GUID for component instance
+        this.id = uuidv4();
+    }
+
+    public readonly id: string;
 }
 
 export abstract class ComponentDefinition<TState> {
