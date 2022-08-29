@@ -8,7 +8,6 @@
     import { H3ComponentDefinition } from "../components/plugins/standard/H3Component";
     import { ImageComponentDefinition } from "../components/plugins/standard/ImageComponent";
     import { TextComponentDefinition } from "../components/plugins/standard/TextComponent";
-    import Spawner from "../components/Spawner.svelte";
     import Elements from "./Elements.svelte";
 
     clearDocument();
